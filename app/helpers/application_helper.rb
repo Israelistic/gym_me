@@ -6,6 +6,10 @@ module ApplicationHelper
     opts
   end
 
+  def online_status(user)
+    content_tag :span, user.name, class: "user-#{user.id} online_status #{'online' if user.online?}"
+  end
+
   def emojify(content)
   h(content).to_str.gsub(/:([\w+-]+):/) do |match|
     if emoji = Emoji.find_by_alias($1)

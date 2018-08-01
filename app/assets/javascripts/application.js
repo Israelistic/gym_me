@@ -14,5 +14,4 @@
 //= require rails-ujs
 //= require activestorage
 //= require cable
-//= require conversations
 //= require_tree .

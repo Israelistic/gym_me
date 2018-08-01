@@ -20,6 +20,10 @@ has_many :personal_messages, dependent: :destroy
     email.split('@')[0]
   end
 
+  def online?
+    !Redis.new.get("user_#{self.id}_online").nil?
+  end
+
   def full_name
     if first_name && last_name
       "#{first_name} #{last_name}"

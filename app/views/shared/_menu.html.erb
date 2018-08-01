@@ -1,0 +1,14 @@
+
+
+<% if user_signed_in? %>
+  <div id="current-user"></div>
+  <p>Signed in as <%= current_user.name %> | <%= link_to 'log out', destroy_user_session_path, method: :delete %></p>
+  <%= link_to "Create Event", new_event_path %> |
+  <%= link_to "All Events", events_path %> |
+  <%= link_to "My Profile", user_path(current_user.id) %> |
+  <%= link_to "Find Gym Buddy", users_path %> |
+  <%= link_to "My Conversations", conversations_path %>
+<% else %>
+  <%= link_to "Log-in", new_user_session_path %> |
+  <%= link_to "Register", new_user_registration_url %>
+<% end %>

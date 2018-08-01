@@ -1,7 +1,19 @@
 class PersonalMessage < ApplicationRecord
-  # has_many relation, specifying the default sorting rule for personal_messages (the oldest one comes first)
-
   belongs_to :conversation
   belongs_to :user
+
   validates :body, presence: true
+
+  after_create_commit do
+    conversation.touch
+    NotificationBroadcastJob.perform_later(self)
+  end
+
+  def receiver
+    if conversation.author == conversation.receiver || conversation.receiver == user
+      conversation.author
+    else
+      conversation.receiver
+    end
+  end
 end
