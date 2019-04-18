@@ -19,9 +19,6 @@
 </section>
 
 <header class="event-index">
-  <div class="map-icon" id="map-button">
-    <%= image_tag("noun_Map.png") %>
-  </div>
   <h1 class="index-header">Refine Your Search</h1>
   <nav class="search">
     <%= form_tag events_path, method: :get do %>
@@ -33,7 +30,17 @@
     <% end %>
 
   </nav>
+
+</header>
+
+<section class="event-reults home">
+
   <!-- eventsMap is the map -->
+  <p class="map-icon-description" id="hide-map-desc">Hide Map</p>
+  <p class="hidden map-icon-description" id="show-map-desc">Show Map</p>
+  <div class="map-icon" id="map-button">
+    <%= image_tag("noun_Map.png") %>
+  </div>
   <div class="map-container">
     <div class"event-index-map" id="eventsMap" ></div>
 
@@ -44,18 +51,21 @@
   </div>
 
 
-</header>
-
-<section class="event-reults">
   <% @events.each do |event| %>
-    <div class="event">
-      <p class="date"><%= event.time.strftime("%m/%d/%Y @ %I:%M%p") %></p>
+    <%= link_to event_url(event.id) do %>
       <div class="event-card">
-        <h3 class="event-title"><%= link_to event.title, event_url(event.id)%></h3>
-        <p><%= event.description %></p>
-        <p class="address"><%= event.address %></p>
-        <div class="event-icon"><%= image_tag(event_activity_icon(event)) %></div>
+        <div class="event-icon-container">
+          <div class="event-icon"><%= image_tag(event_activity_icon(event)) %></div>
+        </div>
+        <div class="event-info">
+          <p class="date"><%= event.time.strftime("%A %b %d, %Y") %></p>
+          <h3 class="event-title"><%= event.title %></h3>
+          <p class="address"><%= event.address %></p>
+          <p class="event-description"><%= event.description %></p>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
+
+
 </section>

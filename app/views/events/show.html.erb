@@ -49,22 +49,15 @@
       <h3 class="event-header">Details</h3>
       <p class="event-details"><%= @event.description %></p>
     </div>
-    <!-- GOOGLE MAPS-->
-    <div class="event-show-map" id="map" data-latitude="<%= @event.latitude %>" data-longitude="<%= @event.longitude %>"></div>
-      <div id="infowindow-content">
-            <img src="" width="16" height="16" id="place-icon">
-            <span id="place-name"  class="title"></span><br>
-            <span id="place-address"></span>
-      </div>
 
 
     <section class="comment-area">
       <% if current_user && joined_event? %>
         <% @comments.each do |comment| %>
           <div class="comment">
-            <p><%= comment.user.email %></p>
-            <p><%= comment.body %></p>
-            <p><em><%= comment.created_at.strftime("%m/%d/%Y at %I:%M%p") %></em></p>
+            <p class="comment-user"><%= comment.user.email %></p>
+            <p class="comment-time"><em><%= comment.created_at.strftime("%m/%d/%Y at %I:%M%p") %></em></p>
+            <p class="comment-body">"<%= comment.body %>"</p>
             <!-- Check if user created comment to have authorization to delete it  -->
             <% if comment.user.id == current_user.id %>
               <%= button_to "delete comment", event_comment_path(@event, comment.id), data: { confirm: "Are you sure?" }, method: :delete %>

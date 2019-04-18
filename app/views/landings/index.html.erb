@@ -1,35 +1,35 @@
 <section class="landingPageContainer">
-<div class="navBar">
-<% if current_user %>
-  <%= render "shared/nav_bar" %>
-<% else %>
-  <%= render "shared/landing_nav_bar" %>
-<% end %>
-</div>
-<div  class="signIn">
-<% if !current_user %>
-<nav class="sign-in">
-  <p>Already a Member?</p>
-  <a href="/users/sign_in" class="sign-in-button">Sign In</a>
-</nav>
-<% end %>
-</div>
-<div class="landingbox">
-  <div class="mainpagebox">
-    <h1>Get Motivated</h1>
-    <p>Find a gym buddy</p>
-    <p>Meet new people</p>
-    <a href="#meetYourMatch"><button>Learn More</button></a>
+  <div class="navBar">
+  <% if current_user %>
+    <%= render "shared/nav_bar" %>
+  <% else %>
+    <%= render "shared/landing_nav_bar" %>
+  <% end %>
+  </div>
+  <div  class="signIn">
+  <% if !current_user %>
+  <nav class="sign-in">
+    <p>Already a Member?</p>
+    <a href="/users/sign_in" class="sign-in-button">Sign In</a>
+  </nav>
+  <% end %>
+  </div>
+  <div class="landingbox">
+    <div class="mainpagebox">
+      <h1>Get Motivated</h1>
+      <p>Find a gym buddy</p>
+      <p>Meet new people</p>
+      <a href="#meetYourMatch"><button>Learn More</button></a>
 
+    </div>
+    <div class="mainpagebox2">
+      <h1>Find Your FITNESS</h1>
+      <p>Search for events in your area<br>
+      Grow your community<br>
+      Get active</p>
+      <a href="#"><button>Join Now</button></a>
+    </div>
   </div>
-  <div class="mainpagebox2">
-    <h1>Find Your FITNESS</h1>
-    <p>Search for events in your area</p>
-    <p>Grow your community</p>
-    <p>Get active</p>
-    <a href="#"><button>Join Now</button></a>
-  </div>
-</div>
 </section>
 
 <section class="meetMatch" id="meetYourMatch">

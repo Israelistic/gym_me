@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", function(){
     var eventsMarkerTitle = document.getElementsByClassName('eventsMarkerTitle');
 
 
-    document.querySelector('#eventsMap').className += "show"
-    document.querySelector('#eventsMap').style.height = "500px"
+    // document.querySelector('#eventsMap').className += "show"
+    document.querySelector('#eventsMap').style.height = "300px"
     console.log(eventsMarkerTitle[0].attributes[1].value);
 
     // console.log(eventsMarkerTitle[0].attributes[1].value);
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function(){
         });
         return marker;
     };
-    //toggleBounce making the marker to bounce
+    //toggleBounce making the marker bounce
     function toggleBounce(mapMarker) {
         if (mapMarker.getAnimation() !== null) {
             mapMarker.setAnimation(null);
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function(){
             mapMarker.setAnimation(google.maps.Animation.BOUNCE);
         }
     }
-    // make marker to bounce
+    // make marker bounce
     function addMarkerWithTimeout(position, name, map, timeout) {
        window.setTimeout(function() {
            var marker = new google.maps.Marker({

@@ -1,25 +1,21 @@
 div.hidden {
   display: none;
 }
+p.hidden {
+  display: none;
+}
 
 .map-icon {
   width: 2.6em;
   display: inline-block;
-  vertical-align: middle;
+  cursor: pointer;
+} .map-icon:hover {
+  border: white solid 2px;
 }
 
-.event-show-map {
-   height: 50%;
-   width: 50%;
-   position: absolute;
-
-}
-
-.event-index-map {
-  height: 500px;
-  position: relative;
-  overflow: show;
-
+.map-icon-description {
+  font-size: 10px;
+  margin: 5px;
 }
 
 
