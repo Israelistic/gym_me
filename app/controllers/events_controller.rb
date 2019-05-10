@@ -17,11 +17,11 @@ class EventsController < ApplicationController
         # and that the event has not started
         available_events = []
         search_events.each do |event|
-          if event.capacity && event.time
-            if event.capacity > 0 && event.time > Time.now
+          # if event.capacity && event.time
+          #   if event.capacity > 0 && event.time > Time.now
               available_events << event
-            end
-          end
+          #   end
+          # end
         end
         @events = available_events
     else
@@ -29,11 +29,11 @@ class EventsController < ApplicationController
         available_events = []
         all_events = Event.all
         all_events.each do |event|
-          if event.capacity && event.time
-            if event.capacity > 0 && event.time > Time.now
+          # if event.capacity && event.time
+          #   if event.capacity > 0 && event.time > Time.now
               available_events << event
-            end
-          end
+          #   end
+          # end
         end
         @events = available_events
     end

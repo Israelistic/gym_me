@@ -7,47 +7,49 @@
 </div>
 
 <section class="user-profile-card">
-  <div class="profile-info">
-    <div class="user-name">
-      <h1><%= @user.first_name %> <%= @user.last_name %></h1>
+  <div class="flex-profile-card">
+    <div class="profile-info">
+      <div class="user-name">
+        <h1><%= @user.first_name %> <%= @user.last_name %></h1>
+      </div>
+      <div class="profile-card">
+        <div class="profile-item">
+          <h2>Age:</h2> <h3><%= @user.age %></h3>
+        </div>
+        <div class="profile-item">
+          <h2>Gender:</h2> <h3><%= @user.gender %></h3>
+        </div>
+        <div class="profile-item">
+          <h2>Fitness Level:</h2> <h3><%= @user.fitness_level %></h3>
+        </div>
+      </div>
+      <div class="profile-card">
+        <div class="profile-item">
+          <h2>Preferred Workout Location:</h2> <h3><%= @user.location %></h3>
+        </div>
+        <div class="profile-item">
+          <h2>Availability:</h2> <h3>Mon - Friday</h3><h3>Evening</h3>
+        </div>
+      </div>
+      <div class="profile-card">
+        <div class="profile-item">
+          <p><%= @user.description %></p>
+        </div>
+      </div>
     </div>
-    <div class="profile-card">
-      <div class="profile-item">
-        <h2>Age:</h2> <h3><%= @user.age %></h3>
+    <% if @user.avatar.attached? %>
+      <div class="profile-avatar">
+        <%= image_tag url_for(@user.avatar) %>
       </div>
-      <div class="profile-item">
-        <h2>Gender:</h2> <h3><%= @user.gender %></h3>
+    <% end %>
+
+
+    <% if current_user != @user %>
+      <div class="icon-button message">
+        <%= link_to image_tag("noun_message.png", class:"send-message-icon"), new_personal_message_path(receiver_id: params[:id]) %>
       </div>
-      <div class="profile-item">
-        <h2>Fitness Level:</h2> <h3><%= @user.fitness_level %></h3>
-      </div>
-    </div>
-    <div class="profile-card">
-      <div class="profile-item">
-        <h2>Preferred Workout Location:</h2> <h3><%= @user.location %></h3>
-      </div>
-      <div class="profile-item">
-        <h2>Availability:</h2> <h3>Mon - Friday</h3><h3>Evening</h3>
-      </div>
-    </div>
-    <div class="profile-card">
-      <div class="profile-item">
-        <p><%= @user.description %></p>
-      </div>
-    </div>
+    <% end %>
   </div>
-  <% if @user.avatar.attached? %>
-    <div class="profile-avatar">
-      <%= image_tag url_for(@user.avatar) %>
-    </div>
-  <% end %>
-
-
-  <% if current_user != @user %>
-    <div class="icon-button message">
-      <%= link_to image_tag("noun_message.png", class:"send-message-icon"), new_personal_message_path(receiver_id: params[:id]) %>
-    </div>
-  <% end %>
 
 <% if @user == current_user %>
   <div class="icon-button">

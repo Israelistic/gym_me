@@ -4,6 +4,10 @@
 
 // Profile Page
 
+.flex-profile-card {
+  display: flex;
+}
+
 .label-style-1 {
   display: inline-block;
   margin: 0 2px 10px 10px;
@@ -99,7 +103,7 @@ p.fitness-level {
 
 
 .profile-avatar {
-  width: 100px;
+  width: 170px;;
   vertical-align: top;
   margin: 1em;
   }

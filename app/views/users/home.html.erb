@@ -49,7 +49,28 @@
         <% end %>
       <% end %>
       </div>
-    <% else %>
+    <% end %>
+    <% if @owned_events.length > 0 %>
+      <div class="event-cards-container">
+        <h2 class="home-heading">Events You're Hosting</h2>
+        <% @owned_events.each do |event| %>
+          <%= link_to event_url(event.id) do %>
+        <div class="event-card">
+          <div class="event-icon-container">
+            <div class="event-icon"><%= image_tag(event_activity_icon(event)) %></div>
+          </div>
+          <div class="event-info">
+            <p class="date"><%= event.time.strftime("%A %b %d, %Y") %></p>
+            <h3 class="event-title"><%= event.title %></h3>
+            <p class="address"><%= event.address %></p>
+            <p class="event-description"><%= event.description %></p>
+          </div>
+        </div>
+      </div>
+          <% end %>
+        <% end %>
+    <% end %>
+    <% if @owned_events.length == 0 && @events.length == 0 %>
       <div class="event-cards-container">
         <p class="no-rsvps">No Upcomming Events...</p>
         <h2 class="home-greeting">Let Jimmy help you with that!</h2>
@@ -61,16 +82,5 @@
         </div>
       </div>
     <% end %>
-    <% if @owned_events.length > 0 %>
-      <h2 class="home-heading">Events You're Hosting</h2>
-        <% @owned_events.each do |event| %>
-          <div class="event-card">
-            <p class="date"><%= event.time.strftime("%A %b %d, %Y at %I:%M%p") %></p>
-            <h3 class="event-title"><%= link_to event.title, event_url(event.id)%></h3>
-            <div class="event-icon"><%= image_tag(event_activity_icon(event)) %></div>
-            <p><%= event.description %></p>
-          </div>
-        <% end %>
-    <% end %>
-  <%end %>
+  <% end %>
 </section>

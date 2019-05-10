@@ -27,7 +27,7 @@ end
   e = Event.new
 
   e.title = FFaker::Sport.name
-  e.address = ["#{rand(500)} King St. W", "#{rand(500)} Yonge St.", "#{rand(400)} Queen St. E"].sample
+  e.address = ["#{rand(500)} King St. W", "#{rand(500)} Yonge St.", "#{rand(400)} Queen St. E, Toronto, ON, Canada"].sample
   e.description = FFaker::CheesyLingo.sentence
   e.capacity = rand(10)
   e.activity_type = ["Yoga/Pilates", "Resistence Training", "Cardio", "Recreation"].sample

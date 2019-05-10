@@ -52,7 +52,7 @@
 
 
     <section class="comment-area">
-      <% if current_user && joined_event? %>
+      <% if current_user && joined_event? || %>
         <% @comments.each do |comment| %>
           <div class="comment">
             <p class="comment-user"><%= comment.user.email %></p>

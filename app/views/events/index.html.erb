@@ -24,7 +24,7 @@
     <%= form_tag events_path, method: :get do %>
 
         <%= select_tag :activity_type, options_for_select([["All Fitness Types", nil], "Yoga/Pilates", "Resistence Training", "Cardio", "Recreation"], selected: params[:activity_type]), include_blank: false %>
-        <%= text_field_tag :search, params[:search] %>
+        <%= text_field_tag :search, params[:search], id: "locationSearchField" %>
 
         <%= submit_tag "Filter" %>
     <% end %>

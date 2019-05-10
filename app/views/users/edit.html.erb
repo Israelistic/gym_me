@@ -7,13 +7,13 @@
 </div>
 
 <section class="edit-profile">
-  <div class="new-event top-heading">
-    <h1 class="new-event-heading">Edit Your Profile</h1>
-  </div>
-  <div class="new-event sub-heading">
-    <h2 class="new-event-heading">Tell us about yourself.</h2>
-  </div>
   <div class="hero-image">
+    <div class="new-event top-heading">
+      <h1 class="new-event-heading">Edit Your Profile</h1>
+    </div>
+    <div class="new-event sub-heading">
+      <h2 class="new-event-heading">Tell us about yourself.</h2>
+    </div>
   </div>
 
   <section class="edit-profile-form">
@@ -64,7 +64,7 @@
         </div>
         <div class="form-item">
           <h3><%= f.label "What is your preferred workout location?" %></h3>
-          <%= f.text_field :location, id: :postal_code, placeholder: "Enter Address" %>
+          <%= f.text_field :location, id: "locationSearchField", placeholder: "Enter Address" %>
         </div>
       </div>
 

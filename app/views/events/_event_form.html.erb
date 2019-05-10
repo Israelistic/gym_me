@@ -6,12 +6,12 @@
     </div>
     <div class="form-item">
       <h3><%= f.label "Where will your event be located?" %></h3>
-      <p><%= f.text_field :address, placeholder: "ex. Toronto, ON" %></p>
+      <p><%= f.text_field :address, placeholder: "ex. Toronto, ON", id: "locationSearchField" %></p>
     </div>
   </div>
 
   <div class="form-card">
-    
+
     <div class="form-item-icon">
       <%= image_tag "calendar.svg" %>
     </div>
@@ -51,7 +51,7 @@
     </div>
     <div class="form-item description">
       <h3><%= f.label "What is a quick description?" %></h3>
-      <p><%= f.text_area :description, placeholder: "Looking for a group to go for a 10k run by the lake" %></p>
+      <p><%= f.text_area :description, placeholder: 'ex. "Looking for a group for a 10k run by the lake"' %></p>
     </div>
   </div>
 
