@@ -9,21 +9,27 @@ class EventsController < ApplicationController
     # if params[:search] && params[:activity_type]
     # check if search parameter is being passed and isnt an empty string
     if params[:search] && !params[:search].empty?
+      radius = 20;
+      search_location_lat = Geocoder.search(params[:search])[0].data["lat"]
+      search_location_lon = Geocoder.search(params[:search])[0].data["lon"]
+      if params[:activity_type] == ""
         # google maps API for search radius
-        radius = 10;
-        search_events = Event.near(params[:search], radius, units: :km).where(activity_type: params[:activity_type])
-
+        search_events = Event.near([search_location_lat, search_location_lon], radius, units: :km)
+      else
+        search_events = Event.near([search_location_lat, search_location_lon], radius, units: :km).where(activity_type: params[:activity_type])
+      end
         # iterate through the events and check if the there are spots available (capacity > 0)
         # and that the event has not started
-        available_events = []
-        search_events.each do |event|
-          # if event.capacity && event.time
-          #   if event.capacity > 0 && event.time > Time.now
-              available_events << event
-          #   end
-          # end
-        end
-        @events = available_events
+        # available_events = []
+        # search_events.each do |event|
+        #   # if event.capacity && event.time
+        #   #   if event.capacity > 0 && event.time > Time.now
+        #       available_events << event
+        #   #   end
+        #   # end
+        # end
+        # @events = available_events
+        @events = search_events
     else
 
         available_events = []
