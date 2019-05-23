@@ -73,12 +73,12 @@
   box-shadow: -3px 3px var(--main-dark-grey), -2px 2px var(--main-dark-grey), -1px 1px var(--main-dark-grey);
 }
 
-label.activity-type > input {
+label.hide-radio-button > input {
   visibility: hidden;
   position: absolute;
 }
 
-label.activity-type > input + img {
+label.hide-radio-button > input + img {
   cursor: pointer;
 }
 
@@ -108,4 +108,27 @@ label.activity-type > input:checked + .activity-icon-all {
 
 .location-search {
   margin: 16px 0 0 0;
+}
+
+.fitness-level-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.form-label {
+  font-size: 2em;
+  margin: 4px;
+  padding: 1px 6px;
+  border: solid white 2px;
+}
+
+label.fitness-level > input:checked + .form-label {
+  // border: 1px solid var(--main-green);
+  background-color: var(--main-green);
+  border: 2px #ff8887 solid;
+  color: var(--main-white);
+}
+
+label.hide-radio-button > p {
+  cursor: pointer;
 }

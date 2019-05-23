@@ -18,18 +18,18 @@ class EventsController < ApplicationController
       else
         search_events = Event.near([search_location_lat, search_location_lon], radius, units: :km).where(activity_type: params[:activity_type])
       end
-        # iterate through the events and check if the there are spots available (capacity > 0)
-        # and that the event has not started
-        # available_events = []
-        # search_events.each do |event|
-        #   # if event.capacity && event.time
-        #   #   if event.capacity > 0 && event.time > Time.now
-        #       available_events << event
-        #   #   end
-        #   # end
-        # end
-        # @events = available_events
-        @events = search_events
+      # iterate through the events and check if the there are spots available (capacity > 0)
+      # and that the event has not started
+      # available_events = []
+      # search_events.each do |event|
+      #   # if event.capacity && event.time
+      #   #   if event.capacity > 0 && event.time > Time.now
+      #       available_events << event
+      #   #   end
+      #   # end
+      # end
+      # @events = available_events
+      @events = search_events
     else
 
         available_events = []

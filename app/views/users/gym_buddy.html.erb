@@ -35,37 +35,51 @@
         <div class="activity-icons-wrapper">
           <div class="activity-icon">
             <p class="activity-type-description">Yoga/Pilates</p>
-            <label class="activity-type">
+            <label class="activity-type hide-radio-button">
               <%= radio_button_tag :activity_goal, "Yoga/Pilates", checked = false %>
               <%= image_tag("lotus-position.svg") %>
             </label>
           </div>
           <div class="activity-icon">
             <p class="activity-type-description">Resistence</p>
-            <label class="activity-type">
+            <label class="activity-type hide-radio-button">
               <%= radio_button_tag :activity_goal, "Resistence Training", checked = false %>
               <%= image_tag("dumbbell.svg") %>
             </label>
           </div>
           <div class="activity-icon">
             <p class="activity-type-description">Cardio</p>
-            <label class="activity-type">
+            <label class="activity-type hide-radio-button">
               <%= radio_button_tag :activity_goal, "Cardio", checked = false %>
               <%= image_tag("athletics.svg") %>
             </label>
           </div>
           <div class="activity-icon">
             <p class="activity-type-description">Recreation</p>
-            <label class="activity-type">
+            <label class="activity-type hide-radio-button">
               <%= radio_button_tag :activity_goal, "Recreation", checked = false %>
               <%= image_tag("american-football.svg") %>
             </label>
           </div>
-          <label class="activity-type">
+          <label class="activity-type hide-radio-button">
             <%= radio_button_tag :activity_goal, "", checked = true %>
             <div class="activity-icon-all">All Types</div>
           </label>
         </div>
+      </div>
+      <div class="fitness-level-wrapper">
+        <label class="fitness-level hide-radio-button">
+          <%= radio_button_tag :fitness_level, 1, checked = true %>
+          <p class="form-label">1</p>
+        </label>
+        <label class="fitness-level hide-radio-button">
+          <%= radio_button_tag :fitness_level, 2, checked = false %>
+          <p class="form-label">2</p>
+        </label>
+        <label class="fitness-level hide-radio-button">
+          <%= radio_button_tag :fitness_level, 3, checked = false %>
+          <p class="form-label">3</p>
+        </label>
       </div>
       <div class="large-submit-button">
         <%= submit_tag "Find Buddy" %>

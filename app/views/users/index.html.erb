@@ -24,7 +24,7 @@
   <nav class="search">
     <%= form_tag users_path, method: :get do %>
 
-        <%= select_tag :activity_goal, options_for_select([["All Fitness Types", nil], "Yoga/Pilates", "Resistence Training", "Cardio", "Recreation"], selected: params[:activity_type]), include_blank: false %>
+        <%= select_tag :activity_goal, options_for_select([["All Fitness Types", nil], "Yoga/Pilates", "Resistence Training", "Cardio", "Recreation"], selected: params[:activity_goal]), include_blank: false %>
         <h3 class="label-style-1">Near</h3>
         <%= text_field_tag :search, params[:search], id: "locationSearchField" %>
 
