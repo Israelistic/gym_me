@@ -27,11 +27,11 @@
         </div>
         <div class="form-item">
           <h2 class="activity-type-header">Find People Near</h2>
-          <%= text_field_tag :search %>
+          <%= text_field_tag :search, params[:search], id: "locationSearchField" %>
         </div>
       </div>
       <div class="form-card discover">
-        <h2 class="activity-type-header">What is your main interest?</h2>
+        <h2 class="activity-type-header">Find by fitness goal</h2>
         <div class="activity-icons-wrapper">
           <div class="activity-icon">
             <p class="activity-type-description">Yoga/Pilates</p>
@@ -63,12 +63,12 @@
           </div>
           <label class="activity-type">
             <%= radio_button_tag :activity_goal, "", checked = true %>
-            <div class="activity-icon-all">Show All</div>
+            <div class="activity-icon-all">All Types</div>
           </label>
         </div>
-        <div class="large-submit-button">
-          <%= submit_tag "Find Buddy" %>
-        </div>
+      </div>
+      <div class="large-submit-button">
+        <%= submit_tag "Find Buddy" %>
       </div>
       <% end %>
     </nav>
