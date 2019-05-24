@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   end
 
   def index
+    raise
     # # check for search parameters
     # if params[:search] && params[:activity_type]
     # check if search parameter is being passed and isnt an empty string
