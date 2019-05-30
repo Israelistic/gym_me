@@ -9,13 +9,13 @@ class UsersController < ApplicationController
     # # check for search parameters
     # if params[:search] && params[:activity_type]
     # check if search parameter is being passed and isnt an empty string
-    if params[:search] && !params[:search].empty?
+    if params[:search] != ""
       # radius = 20;
       # search_location_lat = Geocoder.search(params[:search])[0].data["lat"]
       # search_location_lon = Geocoder.search(params[:search])[0].data["lon"]
-      if params[:activity_goal] == ""
+      if params[:activity_goal] != ""
         # google maps API for search radius
-        search_users = User.where(fitness_level: params[:fitness_level])
+        search_users = User.where(activity_goal: params[:activity_goal])
       else
         search_users = User.where(activity_goal: params[:activity_goal]).where(fitness_level: params[:fitness_level])
       end
