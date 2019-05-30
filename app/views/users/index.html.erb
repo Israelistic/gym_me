@@ -27,6 +27,25 @@
         <%= select_tag :activity_goal, options_for_select([["All Fitness Types", nil], "Yoga/Pilates", "Resistence Training", "Cardio", "Recreation"], selected: params[:activity_goal]), include_blank: false %>
         <h3 class="label-style-1">Near</h3>
         <%= text_field_tag :search, params[:search], id: "locationSearchField" %>
+        <h3>Fitness Level</h3>
+        <div class="fitness-level-wrapper">
+          <label class="fitness-level hide-radio-button">
+            <%= radio_button_tag :fitness_level, 1, checked = false %>
+            <p class="form-label">1</p>
+          </label>
+          <label class="fitness-level hide-radio-button">
+            <%= radio_button_tag :fitness_level, 2, checked = false %>
+            <p class="form-label">2</p>
+          </label>
+          <label class="fitness-level hide-radio-button">
+            <%= radio_button_tag :fitness_level, 3, checked = false %>
+            <p class="form-label">3</p>
+          </label>
+          <label class="fitness-level hide-radio-button">
+            <%= radio_button_tag :fitness_level, 0, checked = false %>
+            <p class="form-label">All</p>
+          </label>
+        </div>
 
         <%= submit_tag "Filter" %>
     <% end %>

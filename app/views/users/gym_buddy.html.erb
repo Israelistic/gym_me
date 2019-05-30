@@ -68,6 +68,7 @@
         </div>
       </div>
       <div class="fitness-level-wrapper">
+        <h3>Fitness Level</h3>
         <label class="fitness-level hide-radio-button">
           <%= radio_button_tag :fitness_level, 1, checked = true %>
           <p class="form-label">1</p>
@@ -79,6 +80,10 @@
         <label class="fitness-level hide-radio-button">
           <%= radio_button_tag :fitness_level, 3, checked = false %>
           <p class="form-label">3</p>
+        </label>
+        <label class="fitness-level hide-radio-button">
+          <%= radio_button_tag :fitness_level, 0, checked = false %>
+          <p class="form-label">All</p>
         </label>
       </div>
       <div class="large-submit-button">

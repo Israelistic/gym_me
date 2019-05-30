@@ -54,7 +54,7 @@
         </div>
         <div class="form-item">
           <h3><%= f.label "What gender do you identify as?" %></h3>
-          <%= f.select :gender, ["Female", "Male", ["Non-Binary", nil], ["Rather Not Say", nil]]%>
+          <%= f.select :gender, [["Rather Not Say", nil], "Female", "Male", ["Non-Binary", nil]]%>
         </div>
       </div>
 
@@ -73,8 +73,12 @@
           <%= image_tag "gym.svg" %>
         </div>
         <div class="form-item">
+          <h3><%= f.label "What is your favorite fitness activity?" %></h3>
+          <p><%= f.select :activity_goal, ["Yoga/Pilates", "Resistence Training", "Cardio", "Recreation"]%></p>
+        </div>
+        <div class="form-item">
           <h3><%= f.label "What is your fitness level?" %></h3>
-          <%= f.select :fitness_level, [1, 2, 3]%>
+          <%= f.select :fitness_level, [["I just started exercising (level 1)", 1], ["I exercise a few times a week (level 2)", 2], ["I exercise every day (level 3)", 3]] %>
         </div>
       </div>
 

@@ -5,77 +5,45 @@ class UsersController < ApplicationController
   end
 
   def index
-    raise
-    # # check for search parameters
-    # if params[:search] && params[:activity_type]
-    # check if search parameter is being passed and isnt an empty string
-    if params[:search] != ""
-      # radius = 20;
-      # search_location_lat = Geocoder.search(params[:search])[0].data["lat"]
-      # search_location_lon = Geocoder.search(params[:search])[0].data["lon"]
-      if params[:activity_goal] != ""
-        # google maps API for search radius
-        search_users = User.where(activity_goal: params[:activity_goal])
+    # check if search parameter is an empty string
+    if params[:search] == ""
+      if params[:activity_goal] == ""
+        if params[:fitness_level] == 0
+          search_users = User.all
+        else
+          search_users = User.where(fitness_level: params[:fitness_level])
+        end
       else
         search_users = User.where(activity_goal: params[:activity_goal]).where(fitness_level: params[:fitness_level])
       end
-      # iterate through the events and check if the there are spots available (capacity > 0)
-      # and that the event has not started
-      # available_events = []
-      # search_events.each do |event|
-      #   # if event.capacity && event.time
-      #   #   if event.capacity > 0 && event.time > Time.now
-      #       available_events << event
-      #   #   end
-      #   # end
-      # end
-      # @events = available_events
-      @users = search_users
     else
-      all_users = User.all
-      available_users = []
-
-      all_users.each do |user|
-        if user.matching == true
-          available_users << user
+      # google maps API for search radius
+      radius = 20;
+      search_location_lat = Geocoder.search(params[:search])[0].data["lat"]
+      search_location_lon = Geocoder.search(params[:search])[0].data["lon"]
+      if params[:activity_goal] == ""
+        if params[:fitness_level] == 0
+          search_users = User.near([search_location_lat, search_location_lon], radius, units: :km)
+        else
+          search_users = User.near([search_location_lat, search_location_lon], radius, units: :km).where(fitness_level: params[:fitness_level])
+        end
+      else
+        if params[:fitness_level] == 0
+          search_users = User.near([search_location_lat, search_location_lon], radius, units: :km).where(activity_goal: params[:activity_goal])
+        else
+          search_users = User.near([search_location_lat, search_location_lon], radius, units: :km).where(fitness_level: params[:fitness_level]).where(activity_goal: params[:activity_goal])
         end
       end
-      @users = available_users
     end
 
-
-
-
-
-
-    # check if search parameter is being passed and isnt an empty string
-    if params[:search] && !params[:search].empty?
-      # radius = 20;
-      # search_location_lat = Geocoder.search(params[:search])[0].data["lat"]
-      # search_location_lon = Geocoder.search(params[:search])[0].data["lon"]
-
-      search_users = User.basic_search(params[:search])
-      # iterate through the users and check if the they are looking for gym buddy (ie. user.matching == true)
-      available_users = []
-      search_users.each do |user|
-        if user.matching == true
-          available_users << user
-        end
+    # iterate through search_users and check if they have a public profile
+    available_users = []
+    search_users.each do |user|
+      if user.matching
+        available_users << user
       end
-      @users = available_users
-
-    else
-      all_users = User.all
-      available_users = []
-
-      all_users.each do |user|
-        if user.matching == true
-          available_users << user
-        end
-      end
-      @users = available_users
     end
-
+    @users = available_users
   end
 
   def show
@@ -109,6 +77,7 @@ class UsersController < ApplicationController
     @user.last_name = params[:user][:last_name]
     @user.age = params[:user][:age]
     @user.gender = params[:user][:gender]
+    @user.activity_goal = params[:user][:activity_goal]
     @user.fitness_level = params[:user][:fitness_level]
     @user.location = params[:user][:location]
     @user.description = params[:user][:description]

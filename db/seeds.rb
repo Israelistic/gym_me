@@ -20,6 +20,7 @@
   u.time_of_day = ['Morning', 'Afternoon', 'Evening', 'Twilight'].sample
   u.day = Date::DAYNAMES.sample
   u.age = rand(100)
+  u.activity_goal = ["Yoga/Pilates", "Resistence Training", "Cardio", "Recreation"].sample
   u.save
 end
 
