@@ -21,33 +21,18 @@
 
 <header class="event-index">
   <h1 class="index-header">Refine Your Search</h1>
-  <nav class="search">
+  <nav class="filter-search">
     <%= form_tag users_path, method: :get do %>
 
         <%= select_tag :activity_goal, options_for_select([["All Fitness Types", nil], "Yoga/Pilates", "Resistence Training", "Cardio", "Recreation"], selected: params[:activity_goal]), include_blank: false %>
         <h3 class="label-style-1">Near</h3>
         <%= text_field_tag :search, params[:search], id: "locationSearchField" %>
-        <h3>Fitness Level</h3>
-        <div class="fitness-level-wrapper">
-          <label class="fitness-level hide-radio-button">
-            <%= radio_button_tag :fitness_level, 1, checked = false %>
-            <p class="form-label">1</p>
-          </label>
-          <label class="fitness-level hide-radio-button">
-            <%= radio_button_tag :fitness_level, 2, checked = false %>
-            <p class="form-label">2</p>
-          </label>
-          <label class="fitness-level hide-radio-button">
-            <%= radio_button_tag :fitness_level, 3, checked = false %>
-            <p class="form-label">3</p>
-          </label>
-          <label class="fitness-level hide-radio-button">
-            <%= radio_button_tag :fitness_level, 0, checked = false %>
-            <p class="form-label">All</p>
-          </label>
-        </div>
+        <h3 class="label-style-1">Radius</h3>
+        <%= select_tag :radius, options_for_select([["10km", 10], ["20km", 20], ["30km", 30], ["40km", 40], ["50km", 50], ["60km", 60], ["70km", 70], ["80km", 80], ["90km", 90], ["100km", 100]], selected: params[:radius]), include_blank: false %>
+        <h3 class="label-style-1">Fitness Level</h3>
+        <%= select_tag :fitness_level, options_for_select([1, 2, 3, ["All", "ALL"]], selected: params[:fitness_level]), include_blank: false %>
 
-        <%= submit_tag "Filter" %>
+        <%= submit_tag "Filter", id: "filterButton" %>
     <% end %>
 
   </nav>

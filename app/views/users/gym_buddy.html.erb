@@ -29,9 +29,13 @@
           <h2 class="activity-type-header">Find People Near</h2>
           <%= text_field_tag :search, params[:search], id: "locationSearchField" %>
         </div>
+        <div class="form-item">
+          <h2 class="activity-type-header">Radius</h2>
+          <%= select_tag :radius, options_for_select([["10km", 10], ["20km", 20], ["30km", 30], ["40km", 40], ["50km", 50], ["60km", 60], ["70km", 70], ["80km", 80], ["90km", 90], ["100km", 100]], selected: 20), include_blank: false %>
+        </div>
       </div>
       <div class="form-card discover">
-        <h2 class="activity-type-header">Find by fitness goal</h2>
+        <h2 class="activity-type-header">Fitness Goal</h2>
         <div class="activity-icons-wrapper">
           <div class="activity-icon">
             <p class="activity-type-description">Yoga/Pilates</p>
@@ -67,27 +71,32 @@
           </label>
         </div>
       </div>
-      <div class="fitness-level-wrapper">
-        <h3>Fitness Level</h3>
-        <label class="fitness-level hide-radio-button">
-          <%= radio_button_tag :fitness_level, 1, checked = true %>
-          <p class="form-label">1</p>
-        </label>
-        <label class="fitness-level hide-radio-button">
-          <%= radio_button_tag :fitness_level, 2, checked = false %>
-          <p class="form-label">2</p>
-        </label>
-        <label class="fitness-level hide-radio-button">
-          <%= radio_button_tag :fitness_level, 3, checked = false %>
-          <p class="form-label">3</p>
-        </label>
-        <label class="fitness-level hide-radio-button">
-          <%= radio_button_tag :fitness_level, 0, checked = false %>
-          <p class="form-label">All</p>
-        </label>
+
+      <div class="form-card discover">
+        <h2 class="activity-type-header">Fitness Level</h2>
+        <div class="fitness-level-wrapper">
+          <label class="fitness-level hide-radio-button">
+            <%= radio_button_tag :fitness_level, 1, checked = false %>
+            <p class="form-label">1</p>
+          </label>
+          <label class="fitness-level hide-radio-button">
+            <%= radio_button_tag :fitness_level, 2, checked = false %>
+            <p class="form-label">2</p>
+          </label>
+          <label class="fitness-level hide-radio-button">
+            <%= radio_button_tag :fitness_level, 3, checked = false %>
+            <p class="form-label">3</p>
+          </label>
+          <label class="fitness-level hide-radio-button">
+            <%= radio_button_tag :fitness_level, 'ALL', checked = true %>
+            <p class="form-label">All</p>
+          </label>
+        </div>
       </div>
-      <div class="large-submit-button">
-        <%= submit_tag "Find Buddy" %>
+      <div class="form-submit">
+        <div class="large-submit-button">
+          <%= submit_tag "Find Buddy" %>
+        </div>
       </div>
       <% end %>
     </nav>

@@ -12,7 +12,7 @@
   u.password = "passpass"
   u.first_name = FFaker::Name.first_name
   u.last_name = FFaker::Name.first_name
-  u.fitness_level = rand(3)
+  u.fitness_level = rand(1..3)
   u.location = "#{rand(300)} King St. W"
   u.gender = "Male"
   u.description = FFaker::CheesyLingo.sentence

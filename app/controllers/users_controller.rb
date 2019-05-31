@@ -5,35 +5,46 @@ class UsersController < ApplicationController
   end
 
   def index
-    # check if search parameter is an empty string
-    if params[:search] == ""
-      if params[:activity_goal] == ""
-        if params[:fitness_level] == 0
-          search_users = User.all
-        else
-          search_users = User.where(fitness_level: params[:fitness_level])
-        end
-      else
-        search_users = User.where(activity_goal: params[:activity_goal]).where(fitness_level: params[:fitness_level])
-      end
-    else
-      # google maps API for search radius
-      radius = 20;
+
+    # check if location param is passed, then calcualte lon and lat for the location
+    if params[:search] && params[:search] != ""
+      radius = params[:radius];
       search_location_lat = Geocoder.search(params[:search])[0].data["lat"]
       search_location_lon = Geocoder.search(params[:search])[0].data["lon"]
-      if params[:activity_goal] == ""
-        if params[:fitness_level] == 0
-          search_users = User.near([search_location_lat, search_location_lon], radius, units: :km)
-        else
-          search_users = User.near([search_location_lat, search_location_lon], radius, units: :km).where(fitness_level: params[:fitness_level])
-        end
-      else
-        if params[:fitness_level] == 0
-          search_users = User.near([search_location_lat, search_location_lon], radius, units: :km).where(activity_goal: params[:activity_goal])
-        else
-          search_users = User.near([search_location_lat, search_location_lon], radius, units: :km).where(fitness_level: params[:fitness_level]).where(activity_goal: params[:activity_goal])
-        end
-      end
+    end
+
+
+    # check if location, activity goal and fitness level params are passed
+    if params[:search] && params[:search] != "" && params[:activity_goal] != "" && params[:fitness_level] != 'ALL'
+      search_users = User.near([search_location_lat, search_location_lon], radius, units: :km).where(fitness_level: params[:fitness_level]).where(activity_goal: params[:activity_goal])
+
+    # check if locartion and activity level params are passed
+    elsif params[:search] && params[:search] != "" && params[:activity_goal] != ""
+      search_users = User.near([search_location_lat, search_location_lon], radius, units: :km).where(activity_goal: params[:activity_goal])
+
+    # check if location and fitness level params are passed
+    elsif params[:search] && params[:search] != "" && params[:fitness_level] != 'ALL'
+      search_users = User.near([search_location_lat, search_location_lon], radius, units: :km).where(fitness_level: params[:fitness_level])
+
+    # check if activity goal and fitness level are passed
+    elsif params[:activity_goal] != "" && params[:fitness_level] != 'ALL'
+      search_users = User.where(activity_goal: params[:activity_goal]).where(fitness_level: params[:fitness_level])
+
+    # check if location param is passed
+    elsif params[:search] && params[:search] != ""
+      search_users = User.near([search_location_lat, search_location_lon], radius, units: :km)
+
+    # check if activity param is passed
+    elsif params[:activity_goal] != ""
+      search_users = User.where(activity_goal: params[:activity_goal])
+
+    # check if fitness level param is passed
+    elsif params[:fitness_level] != 'ALL'
+      search_users = User.where(fitness_level: params[:fitness_level])
+
+    # check if all params are left blank
+    else
+      search_users = User.all
     end
 
     # iterate through search_users and check if they have a public profile
@@ -44,6 +55,7 @@ class UsersController < ApplicationController
       end
     end
     @users = available_users
+
   end
 
   def show

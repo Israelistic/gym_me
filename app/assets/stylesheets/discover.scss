@@ -10,10 +10,26 @@
   height: 200px;
 }
 
-.form-card.discover{
+.form-card.discover {
   text-align: center;
 
 }
+
+.filter-search form {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.filter-search #filterButton {
+  margin: 0 10px;
+}
+
+.form-submit {
+  text-align: center;
+  margin: 10px 0;
+}
+
 .event-index {
   text-align: center;
   margin: 1em 0;
