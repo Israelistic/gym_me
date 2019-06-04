@@ -20,6 +20,11 @@ class User < ApplicationRecord
   # active_storage module for giving users avatar photos
   has_one_attached :avatar
 
+  # Define scope for user index 'gym buddy' search
+  scope :activity_goal, -> (activity_goal) { where activity_goal: activity_goal }
+  scope :fitness_level, -> (fitness_level) { where fitness_level: fitness_level }
+  scope :gender, -> (gender) { where gender: gender }
+
   def name
     email.split('@')[0]
   end

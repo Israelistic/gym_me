@@ -24,13 +24,15 @@
   <nav class="filter-search">
     <%= form_tag users_path, method: :get do %>
 
-        <%= select_tag :activity_goal, options_for_select([["All Fitness Types", nil], "Yoga/Pilates", "Resistence Training", "Cardio", "Recreation"], selected: params[:activity_goal]), include_blank: false %>
+        <%= select_tag :activity_goal, options_for_select([["All Fitness Interests", nil], "Yoga/Pilates", "Resistence Training", "Cardio", "Recreation"], selected: params[:activity_goal]), include_blank: false %>
         <h3 class="label-style-1">Near</h3>
         <%= text_field_tag :search, params[:search], id: "locationSearchField" %>
         <h3 class="label-style-1">Radius</h3>
         <%= select_tag :radius, options_for_select([["10km", 10], ["20km", 20], ["30km", 30], ["40km", 40], ["50km", 50], ["60km", 60], ["70km", 70], ["80km", 80], ["90km", 90], ["100km", 100]], selected: params[:radius]), include_blank: false %>
+        <h3 class="label-style-1">Gender</h3>
+        <%= select_tag :gender, options_for_select([["All", nil], "Female", "Male", "Non-Binary"], selected: params[:gender]), include_blank: false %>
         <h3 class="label-style-1">Fitness Level</h3>
-        <%= select_tag :fitness_level, options_for_select([1, 2, 3, ["All", "ALL"]], selected: params[:fitness_level]), include_blank: false %>
+        <%= select_tag :fitness_level, options_for_select([1, 2, 3, ["All", ""]], selected: params[:fitness_level]), include_blank: false %>
 
         <%= submit_tag "Filter", id: "filterButton" %>
     <% end %>
@@ -53,7 +55,7 @@
         </div>
       <% else %>
         <div class="profile-avatar">
-          <%= image_tag url_for("blank-avatar.svg") %>
+          <%= image_tag url_for(user_avatar(user)) %>
         </div>
       <% end %>
 

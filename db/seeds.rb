@@ -14,7 +14,7 @@
   u.last_name = FFaker::Name.first_name
   u.fitness_level = rand(1..3)
   u.location = "#{rand(300)} King St. W"
-  u.gender = "Male"
+  u.gender = ["Male", "Female"].sample
   u.description = FFaker::CheesyLingo.sentence
   u.matching = true
   u.time_of_day = ['Morning', 'Afternoon', 'Evening', 'Twilight'].sample
