@@ -2,7 +2,42 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+
 // Profile Page
+
+.scheduleFlex {
+  display: flex;
+  flex-direction: row;
+}
+
+.scheduleProfile {
+  // border: solid black 1px;
+  padding: 10px;
+}
+
+.dayOfWeekLabels {
+  margin-left: 50px;
+  display: flex;}
+
+.scheduleSquare {
+  height: 20px;
+  width: 20px;
+  border: solid black 1px;
+  margin: 5px;
+}
+
+.scheduleProfile .label-style-schedule {
+  margin: 10px 0 10px 0;
+}
+
+.profile-item .label-style-schedule {
+  font-weight: bold;
+}
+
+.profile-item .timeOfDayLabels {
+  margin: 11.5px 0 0 0;
+}
 
 .flex-profile-card {
   display: flex;
@@ -17,10 +52,7 @@
 .profile-info {
   display: inline-block;
   width: 80%;
-
 }
-
-
 
 .profile-card {
   border-bottom: solid black 1px;

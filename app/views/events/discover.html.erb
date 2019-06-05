@@ -24,7 +24,7 @@
         </div>
         <div class="form-item">
           <h2 class="activity-type-header">Find Events Near</h2>
-          <%= text_field_tag :search, params[:search], id: "locationSearchField" %>
+          <%= text_field_tag :search, current_user.location, id: "locationSearchField" %>
         </div>
       </div>
       <div class="form-card discover">

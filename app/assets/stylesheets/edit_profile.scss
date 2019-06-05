@@ -32,6 +32,34 @@
 }
 
 // ------------- FORM -------------
+
+.schedule {
+  display: flex;
+  flex-direction: row;
+}
+
+.schedule-day {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.timeOfDayLabels {
+  margin-top: 6px;
+  align-items: flex-end;
+}
+
+.label-style-schedule {
+  display: inline-block;
+  margin: 0 5px 4px 5px;
+  font-size: 0.6em;
+}
+
+.timeOfDayLabels .label-style-schedule {
+  margin: 10px 0 0 0
+}
+
 .edit-profile-form {
   margin: 25px auto 50px auto;
   padding: 0 50px;
@@ -51,11 +79,6 @@
 .form-item.name {
   display: block;
   padding: 0 57px;
-}
-
-.form-item.schedule {
-  padding: 0 57px;
-  font-size: 19px;
 }
 
 .form-item.description {
