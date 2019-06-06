@@ -39,7 +39,7 @@ gem 'jquery-ui-rails'
 
 gem 'ffaker'
 
-
+gem 'rubocop-rails', '~> 2.0'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
