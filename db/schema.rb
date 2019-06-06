@@ -37,14 +37,6 @@ ActiveRecord::Schema.define(version: 2019_06_05_171847) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "chat_rooms", force: :cascade do |t|
-    t.string "title"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_chat_rooms_on_user_id"
-  end
-
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -74,37 +66,20 @@ ActiveRecord::Schema.define(version: 2019_06_05_171847) do
     t.string "city"
     t.string "province"
     t.string "country"
-    t.integer "capacity"
-    t.boolean "need_approval"
     t.string "name"
     t.float "latitude"
     t.float "longitude"
+    t.integer "capacity"
+    t.boolean "need_approval"
     t.date "end_date"
     t.boolean "persistence"
     t.string "activity_icon"
-  end
-
-  create_table "messages", force: :cascade do |t|
-    t.text "body"
-    t.bigint "user_id"
-    t.bigint "chat_room_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["chat_room_id"], name: "index_messages_on_chat_room_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "personal_messages", force: :cascade do |t|
     t.string "body"
     t.integer "conversation_id"
     t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "schedules", force: :cascade do |t|
-    t.string "name"
-    t.datetime "start_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -143,7 +118,4 @@ ActiveRecord::Schema.define(version: 2019_06_05_171847) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "chat_rooms", "users"
-  add_foreign_key "messages", "chat_rooms"
-  add_foreign_key "messages", "users"
 end
