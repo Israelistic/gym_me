@@ -6,6 +6,8 @@
 
 // Profile Page
 
+
+
 .scheduleFlex {
   display: flex;
   flex-direction: row;
@@ -18,7 +20,12 @@
 
 .dayOfWeekLabels {
   margin-left: 50px;
-  display: flex;}
+  display: flex;
+}
+
+.scheduleSquareAvailable {
+  background-color: var(--main-green);
+}
 
 .scheduleSquare {
   height: 20px;
