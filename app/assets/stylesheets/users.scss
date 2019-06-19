@@ -11,17 +11,27 @@
 .scheduleFlex {
   display: flex;
   flex-direction: row;
+  align-items: flex-end;
 }
 
 .scheduleProfile {
   // border: solid black 1px;
   padding: 10px;
+  // font-family: monospace;
+
+}
+
+.scheduleProfile .schedule-day {
+  align-items: center;  
 }
 
 .dayOfWeekLabels {
   margin-left: 50px;
   display: flex;
+  justify-content: space-between;
 }
+
+
 
 .scheduleSquareAvailable {
   background-color: var(--main-green);
@@ -38,12 +48,16 @@
   margin: 10px 0 10px 0;
 }
 
+.label-style-schedule.scheduleShowLabel {
+  margin: 0 0 0 0;
+}
+
 .profile-item .label-style-schedule {
   font-weight: bold;
 }
 
 .profile-item .timeOfDayLabels {
-  margin: 11.5px 0 0 0;
+
 }
 
 .flex-profile-card {

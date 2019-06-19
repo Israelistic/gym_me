@@ -41,13 +41,13 @@
 .schedule-day {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   justify-content: flex-start;
 }
 
 .timeOfDayLabels {
-  margin-top: 6px;
   align-items: flex-end;
+  margin-top: 7px;
 }
 
 .label-style-schedule {
@@ -56,8 +56,12 @@
   font-size: 0.6em;
 }
 
+.scheduleShowLabel {
+  margin: 0;
+}
+
 .timeOfDayLabels .label-style-schedule {
-  margin: 10px 0 0 0
+  margin: 9px 0 0 0
 }
 
 .edit-profile-form {
