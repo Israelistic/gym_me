@@ -16,16 +16,31 @@ class UsersController < ApplicationController
     end
     @users = @users.where(matching: true)
 
-
     filtering_params(params).each do |key, value|
       @users = @users.public_send(key, value) if value.present?
     end
+
 
     # Above makes use of filtering_params private method and public_send ruby method to reduce the following redundant code.
     # Also, if more search params are added, they are automatically accounted for.
     # @users = @users.activity_goal(params[:activity_goal]) if params[:activity_goal].present?
     # @users = @users.fitness_level(params[:fitness_level]) if params[:fitness_level].present?
     # @users = @users.gender(params[:gender]) if params[:gender].present?
+
+
+    if params[:availability_check].present?
+      available_users = []
+      @users.each do |user|
+        current_user.availability.each do |day|
+          if user.availability.include?(day)
+            available_users << user
+            break
+          end
+        end
+      end
+      @users = available_users
+    end
+
 
   end
 
@@ -65,7 +80,12 @@ class UsersController < ApplicationController
     @user.location = params[:user][:location]
     @user.description = params[:user][:description]
     @user.matching = params[:user][:matching]
-    @user.availability= params[:user][:availability]
+
+    if params[:user][:availability]
+      @user.availability = params[:user][:availability]
+    else
+      @user.availability = []
+    end
 
     unless params[:user][:avatar] == nil
       @user.avatar.attach(params[:user][:avatar])
@@ -85,5 +105,6 @@ class UsersController < ApplicationController
   def filtering_params(params)
     params.slice(:activity_goal, :fitness_level, :gender)
   end
+
 
 end

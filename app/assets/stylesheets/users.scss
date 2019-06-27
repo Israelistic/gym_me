@@ -22,7 +22,7 @@
 }
 
 .scheduleProfile .schedule-day {
-  align-items: center;  
+  align-items: center;
 }
 
 .dayOfWeekLabels {
@@ -35,6 +35,10 @@
 
 .scheduleSquareAvailable {
   background-color: var(--main-green);
+}
+
+.scheduleSquareAvailableMatch {
+  background-color: #52f262;
 }
 
 .scheduleSquare {

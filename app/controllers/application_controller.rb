@@ -25,6 +25,7 @@ end
   helper_method :joined_event?
   helper_method :user_avatar
   helper_method :event_activity_icon
+  helper_method :availabilityMatch?
 
 
   private
@@ -58,6 +59,16 @@ end
       return "american-football.svg"
     else
       return "gym.svg"
+    end
+  end
+
+  def availabilityMatch?(user, day)
+    if user.availability.include?(day) && current_user.availability.include?(day)
+      return "scheduleSquare scheduleSquareAvailableMatch"
+    elsif user.availability.include?(day)
+      return "scheduleSquare scheduleSquareAvailable"
+    else
+      return "scheduleSquare"
     end
   end
 

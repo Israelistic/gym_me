@@ -40,131 +40,47 @@
               </div>
               <div class="schedule-day">
                 <h4 class="label-style-schedule scheduleShowLabel">MON</h4>
-                <% if @user.availability.include?('mon_morn') %>
-                  <div class="scheduleSquare scheduleSquareAvailable" id="monMorn"></div>
-                <% else %>
-                  <div class="scheduleSquare" id="monMorn"></div>
-                <% end %>
-                <% if @user.availability.include?('mon_aft') %>
-                  <div class="scheduleSquare scheduleSquareAvailable" id="monAft"></div>
-                <% else %>
-                  <div class="scheduleSquare" id="monAft"></div>
-                <% end %>
-                <% if @user.availability.include?('mon_eve') %>
-                  <div class="scheduleSquare scheduleSquareAvailable" id="monEve"></div>
-                <% else %>
-                  <div class="scheduleSquare" id="monEve"></div>
-                <% end %>
+                <div class="<%= availabilityMatch?(@user, 'mon_morn') %>" id="monMorn"></div>
+                <div class="<%= availabilityMatch?(@user, 'mon_aft') %>" id="monAft"></div>
+                <div class="<%= availabilityMatch?(@user, 'mon_eve') %>" id="monEve"></div>
               </div>
               <div class="schedule-day">
                 <div class="schedule-day">
                   <h4 class="label-style-schedule scheduleShowLabel">TUE</h4>
-                  <% if @user.availability.include?('tues_morn') %>
-                    <div class="scheduleSquare scheduleSquareAvailable" id="tuesMorn"></div>
-                  <% else %>
-                    <div class="scheduleSquare" id="tuesMorn"></div>
-                  <% end %>
-                  <% if @user.availability.include?('tues_aft') %>
-                    <div class="scheduleSquare scheduleSquareAvailable" id="tuesAft"></div>
-                  <% else %>
-                    <div class="scheduleSquare" id="tuesAft"></div>
-                  <% end %>
-                  <% if @user.availability.include?('tues_eve') %>
-                    <div class="scheduleSquare scheduleSquareAvailable" id="tuesEve"></div>
-                  <% else %>
-                    <div class="scheduleSquare" id="tuesEve"></div>
-                  <% end %>
+                  <div class="<%= availabilityMatch?(@user, 'tues_morn') %>" id="tuesMorn"></div>
+                  <div class="<%= availabilityMatch?(@user, 'tues_aft') %>" id="tuesAft"></div>
+                  <div class="<%= availabilityMatch?(@user, 'tues_eve') %>" id="tuesEve"></div>
                 </div>
               </div>
               <div class="schedule-day">
                 <h4 class="label-style-schedule scheduleShowLabel">WED</h4>
-                <% if @user.availability.include?('wed_morn') %>
-                  <div class="scheduleSquare scheduleSquareAvailable" id="wedMorn"></div>
-                <% else %>
-                  <div class="scheduleSquare" id="wedMorn"></div>
-                <% end %>
-                <% if @user.availability.include?('wed_aft') %>
-                  <div class="scheduleSquare scheduleSquareAvailable" id="wedAft"></div>
-                <% else %>
-                  <div class="scheduleSquare" id="wedAft"></div>
-                <% end %>
-                <% if @user.availability.include?('wed_eve') %>
-                  <div class="scheduleSquare scheduleSquareAvailable" id="wedEve"></div>
-                <% else %>
-                  <div class="scheduleSquare" id="wedEve"></div>
-                <% end %>
+                <div class="<%= availabilityMatch?(@user, 'wed_morn') %>" id="wedMorn"></div>
+                <div class="<%= availabilityMatch?(@user, 'wed_aft') %>" id="wedAft"></div>
+                <div class="<%= availabilityMatch?(@user, 'wed_eve') %>" id="wedEve"></div>
               </div>
               <div class="schedule-day">
                 <h4 class="label-style-schedule scheduleShowLabel">THU</h4>
-                <% if @user.availability.include?('thurs_morn') %>
-                  <div class="scheduleSquare scheduleSquareAvailable" id="thursMorn"></div>
-                <% else %>
-                  <div class="scheduleSquare" id="thursMorn"></div>
-                <% end %>
-                <% if @user.availability.include?('thurs_aft') %>
-                  <div class="scheduleSquare scheduleSquareAvailable" id="thursAft"></div>
-                <% else %>
-                  <div class="scheduleSquare" id="thursAft"></div>
-                <% end %>
-                <% if @user.availability.include?('thurs_eve') %>
-                  <div class="scheduleSquare scheduleSquareAvailable" id="thursEve"></div>
-                <% else %>
-                  <div class="scheduleSquare" id="thursEve"></div>
-                <% end %>
+                <div class="<%= availabilityMatch?(@user, 'thurs_morn') %>" id="thursMorn"></div>
+                <div class="<%= availabilityMatch?(@user, 'thurs_aft') %>" id="thursAft"></div>
+                <div class="<%= availabilityMatch?(@user, 'thurs_eve') %>" id="thursEve"></div>
               </div>
               <div class="schedule-day">
                 <h4 class="label-style-schedule scheduleShowLabel">FRI</h4>
-                <% if @user.availability.include?('fri_morn') %>
-                  <div class="scheduleSquare scheduleSquareAvailable" id="friMorn"></div>
-                <% else %>
-                  <div class="scheduleSquare" id="friMorn"></div>
-                <% end %>
-                <% if @user.availability.include?('fri_aft') %>
-                  <div class="scheduleSquare scheduleSquareAvailable" id="friAft"></div>
-                <% else %>
-                  <div class="scheduleSquare" id="friAft"></div>
-                <% end %>
-                <% if @user.availability.include?('fri_eve') %>
-                  <div class="scheduleSquare scheduleSquareAvailable" id="friEve"></div>
-                <% else %>
-                  <div class="scheduleSquare" id="friEve"></div>
-                <% end %>
+                <div class="<%= availabilityMatch?(@user, 'fri_morn') %>" id="friMorn"></div>
+                <div class="<%= availabilityMatch?(@user, 'fri_aft') %>" id="friAft"></div>
+                <div class="<%= availabilityMatch?(@user, 'fri_eve') %>" id="friEve"></div>
               </div>
               <div class="schedule-day">
                 <h4 class="label-style-schedule scheduleShowLabel">SAT</h4>
-                <% if @user.availability.include?('sat_morn') %>
-                  <div class="scheduleSquare scheduleSquareAvailable" id="satMorn"></div>
-                <% else %>
-                  <div class="scheduleSquare" id="satMorn"></div>
-                <% end %>
-                <% if @user.availability.include?('sat_aft') %>
-                  <div class="scheduleSquare scheduleSquareAvailable" id="satAft"></div>
-                <% else %>
-                  <div class="scheduleSquare" id="satAft"></div>
-                <% end %>
-                <% if @user.availability.include?('sat_eve') %>
-                  <div class="scheduleSquare scheduleSquareAvailable" id="satEve"></div>
-                <% else %>
-                  <div class="scheduleSquare" id="satEve"></div>
-                <% end %>
+                <div class="<%= availabilityMatch?(@user, 'sat_morn') %>" id="satMorn"></div>
+                <div class="<%= availabilityMatch?(@user, 'sat_aft') %>" id="satAft"></div>
+                <div class="<%= availabilityMatch?(@user, 'sat_eve') %>" id="satEve"></div>
               </div>
               <div class="schedule-day">
                 <h4 class="label-style-schedule scheduleShowLabel">SUN</h4>
-                <% if @user.availability.include?('sun_morn') %>
-                  <div class="scheduleSquare scheduleSquareAvailable" id="sunMorn"></div>
-                <% else %>
-                  <div class="scheduleSquare" id="sunMorn"></div>
-                <% end %>
-                <% if @user.availability.include?('sun_aft') %>
-                  <div class="scheduleSquare scheduleSquareAvailable" id="sunAft"></div>
-                <% else %>
-                  <div class="scheduleSquare" id="sunAft"></div>
-                <% end %>
-                <% if @user.availability.include?('sun_eve') %>
-                  <div class="scheduleSquare scheduleSquareAvailable" id="sunEve"></div>
-                <% else %>
-                  <div class="scheduleSquare" id="sunEve"></div>
-                <% end %>
+                <div class="<%= availabilityMatch?(@user, 'sun_morn') %>" id="sunMorn"></div>
+                <div class="<%= availabilityMatch?(@user, 'sun_aft') %>" id="sunAft"></div>
+                <div class="<%= availabilityMatch?(@user, 'sun_eve') %>" id="sunEve"></div>
               </div>
             </div>
           </div>

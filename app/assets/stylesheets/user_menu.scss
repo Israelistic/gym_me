@@ -23,14 +23,15 @@
 
 .avatar {
   display: inline-block;
-  width: 2em;
-  height: 2em;
-  border: 1px var(--main-white) solid;
+  width: 1.9em;
+  height: 1.9em;
+  // border: 1px var(--main-white) solid;
   border-radius: 100%;
   vertical-align: middle;
   padding: 0;
 }
 
 .avatar img {
-  border-radius: 80%;
+  border-radius: 50%;
+  height: 100%;
 }

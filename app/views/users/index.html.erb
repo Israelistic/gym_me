@@ -44,29 +44,30 @@
 
 
   <section class="user-results">
-    <% @users.each do |user| %>
-    <%= link_to user_url(user.id) do %>
-
-      <div class="user-card">
-
-      <% if user.avatar.attached? %>
-        <div class="profile-avatar">
-          <%= image_tag url_for(user.avatar) %>
-        </div>
-      <% else %>
-        <div class="profile-avatar">
-          <%= image_tag url_for(user_avatar(user)) %>
-        </div>
+    <% if @users.length == 0 %>
+      <h3 class="index-user-name">Sorry! No users found </h3>
+    <% else %>
+      <% @users.each do |user| %>
+        <% unless user == current_user %>
+          <%= link_to user_url(user.id) do %>
+            <div class="user-card">
+            <% if user.avatar.attached? %>
+              <div class="profile-avatar">
+                <%= image_tag url_for(user.avatar) %>
+              </div>
+            <% else %>
+              <div class="profile-avatar">
+                <%= image_tag url_for(user_avatar(user)) %>
+              </div>
+            <% end %>
+              <div class="user-card-content">
+                <h3 class="index-user-name"><%= user.full_name %></h3>
+                <p class="fitness-level">Fitness Level: <%= user.fitness_level %></p>
+                <p class="user-location"><%= user.location %></p>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
       <% end %>
-
-        <div class="user-card-content">
-          <h3 class="index-user-name"><%= user.full_name %></h3>
-          <p class="fitness-level">Fitness Level: <%= user.fitness_level %></p>
-          <p class="user-location"><%= user.location %></p>
-        </div>
-
-      </div>
-    <% end %>
-
     <% end %>
   </section>

@@ -21,6 +21,12 @@
   u.day = Date::DAYNAMES.sample
   u.age = rand(100)
   u.activity_goal = ["Yoga/Pilates", "Resistence Training", "Cardio", "Recreation"].sample
+  u.availability = []
+  options = ["mon_morn", "mon_aft", "mon_eve", "tues_morn", "tues_aft", "tues_eve", "wed_morn", "wed_aft", "wed_eve", "thurs_morn", "thurs_aft", "thurs_eve", "fri_morn", "fri_aft", "fri_eve", "sat_morn", "sat_aft", "sat_eve", "sun_morn", "sun_aft", "sun_eve"]
+  10.times do
+    day = options.sample
+    u.availability << day unless u.availability.include?(day)
+  end
   u.save
 end
 
