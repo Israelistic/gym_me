@@ -31,6 +31,7 @@ gem 'textacular', '~> 5.0'
 #Complete Ruby geocoding solution.http://www.rubygeocoder.com/
 gem 'geocoder'
 #
+
 gem 'jquery-rails'
 gem 'rubocop-rails'
 gem 'gemoji'
