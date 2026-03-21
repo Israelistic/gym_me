@@ -60,7 +60,7 @@ class UsersController < ApplicationController
       @events = @user.events
       @owned_events = @user.owned_events
     else
-      redirect_to "devise/sessions#new"
+      redirect_to new_user_session_path
     end
   end
 

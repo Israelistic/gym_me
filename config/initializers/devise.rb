@@ -19,7 +19,7 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
-  config.secret_key = 'd64f090935473adbeafc6aba5ae04cb3016c089a0f400be4d380276ec0151a120c91ac9e35801f68ad063f240664685f3145e30bb07a653d05366404cfffb5ee'
+  config.secret_key = ENV.fetch('DEVISE_SECRET_KEY') { Rails.application.credentials.secret_key_base }
 
 
 

@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show, :discover]
 
   def discover
 
@@ -93,10 +94,18 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id])
+    unless @event.user_id == current_user.id
+      redirect_to events_path, alert: "You are not authorized to edit this event."
+      return
+    end
   end
 
   def update
     @event = Event.find(params[:id])
+    unless @event.user_id == current_user.id
+      redirect_to events_path, alert: "You are not authorized to update this event."
+      return
+    end
 
     @event.title = params[:event][:title]
     @event.address = params[:event][:address]
