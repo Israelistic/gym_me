@@ -19,11 +19,25 @@ class User < ApplicationRecord
   has_many :personal_messages, dependent: :destroy
   # active_storage module for giving users avatar photos
   has_one_attached :avatar
+  validate :acceptable_avatar
+
+  def acceptable_avatar
+    return unless avatar.attached?
+
+    unless avatar.blob.byte_size <= 5.megabyte
+      errors.add(:avatar, "is too large (max 5MB)")
+    end
+
+    acceptable_types = ["image/jpeg", "image/png", "image/gif", "image/webp"]
+    unless acceptable_types.include?(avatar.content_type)
+      errors.add(:avatar, "must be a JPEG, PNG, GIF, or WebP image")
+    end
+  end
 
   # Define scope for user index 'gym buddy' search
-  scope :activity_goal, -> (activity_goal) { where activity_goal: activity_goal }
-  scope :fitness_level, -> (fitness_level) { where fitness_level: fitness_level }
-  scope :gender, -> (gender) { where gender: gender }
+  scope :activity_goal, ->(activity_goal) { where activity_goal: activity_goal }
+  scope :fitness_level, ->(fitness_level) { where fitness_level: fitness_level }
+  scope :gender, ->(gender) { where gender: gender }
 
   def name
     email.split('@')[0]

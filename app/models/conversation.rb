@@ -6,7 +6,7 @@ class Conversation < ApplicationRecord
 
   validates :author, uniqueness: {scope: :receiver}
 
-  scope :participating, -> (user) do
+  scope :participating, ->(user) do
     where("(conversations.author_id = ? OR conversations.receiver_id = ?)", user.id, user.id)
   end
 #  with is a method that returns the other participant of a conversation
@@ -14,7 +14,7 @@ class Conversation < ApplicationRecord
     author == current_user ? receiver : author
   end
 
-  scope :between, -> (sender_id, receiver_id) do
+  scope :between, ->(sender_id, receiver_id) do
     where(author_id: sender_id, receiver_id: receiver_id).or(where(author_id: receiver_id, receiver_id: sender_id)).limit(1)
   end
 # ...

@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module GymMe
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.2
+    config.load_defaults 7.1
 
     # Change time zone for active record
     config.time_zone = 'Eastern Time (US & Canada)'
