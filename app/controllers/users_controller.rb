@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:show]
 
+  ALLOWED_FILTERS = %w[activity_goal fitness_level gender].freeze
+  MAX_SEARCH_RADIUS = 100
+
   def gym_buddy; end
 
   def index
@@ -10,12 +13,15 @@ class UsersController < ApplicationController
       result = Geocoder.search(params[:search]).first
       if result
         coords = [result.data["lat"], result.data["lon"]]
-        @users = User.near(coords, params[:radius], units: :km).where(matching: true)
+        radius = [[params[:radius].to_i, 1].max, MAX_SEARCH_RADIUS].min
+        @users = User.near(coords, radius, units: :km).where(matching: true)
       end
     end
 
     filtering_params(params).each do |key, value|
-      @users = @users.public_send(key, value) if value.present?
+      if value.present? && ALLOWED_FILTERS.include?(key.to_s)
+        @users = @users.public_send(key, value)
+      end
     end
 
     if params[:availability_check].present? && current_user.availability.present?

@@ -15,8 +15,8 @@ class ApplicationController < ActionController::Base
   private
 
   def joined_event?
-    current_event = Event.find(params[:id])
-    current_user && current_event.users.exists?(id: current_user.id)
+    current_event = Event.find_by(id: params[:id])
+    current_user && current_event&.users&.exists?(id: current_user.id)
   end
 
   def user_avatar(user)

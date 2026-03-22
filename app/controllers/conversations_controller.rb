@@ -1,4 +1,5 @@
 class ConversationsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_conversation, except: [:index]
   before_action :check_participating!, except: [:index]
 
@@ -8,11 +9,9 @@ class ConversationsController < ApplicationController
       format.html
       format.js
     end
-    
   end
 
   def show
-    @conversation = Conversation.find_by(id: params[:id])
     @personal_message = PersonalMessage.new
   end
 

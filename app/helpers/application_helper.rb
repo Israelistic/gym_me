@@ -15,7 +15,9 @@ module ApplicationHelper
     h(content).to_str.gsub(/:([\w+-]+):/) do |match|
       emoji = Emoji.find_by_alias($1)
       if emoji
-        %(<img alt="#{$1}" src="#{image_path("emoji/#{emoji.image_filename}")}" style="vertical-align:middle" width="20" height="20" />)
+        alias_name = ERB::Util.html_escape($1)
+        filename = ERB::Util.html_escape(emoji.image_filename)
+        %(<img alt="#{alias_name}" src="#{image_path("emoji/#{filename}")}" style="vertical-align:middle" width="20" height="20" />)
       else
         match
       end

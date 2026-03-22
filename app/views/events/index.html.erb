@@ -45,8 +45,8 @@
     <div class"event-index-map" id="eventsMap" ></div>
 
     <% @events.each do | event | %>
-      <div class="eventsLatLong" data-latitude="<%= event.latitude %>" data-longitude="<%= event.longitude %>"></div>
-      <div class="eventsMarkerTitle" data-title="<%= event.title %>"></div>
+      <%= tag.div class: "eventsLatLong", data: { latitude: event.latitude, longitude: event.longitude } %>
+      <%= tag.div class: "eventsMarkerTitle", data: { title: event.title } %>
     <% end %>
   </div>
 
