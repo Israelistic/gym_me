@@ -1,61 +1,30 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :discover]
+  before_action :set_event, only: [:show, :edit, :update]
+  before_action :authorize_owner!, only: [:edit, :update]
 
-  def discover
+  ACTIVITY_ICONS = {
+    "Yoga/Pilates" => "lotus-position.svg",
+    "Resistence Training" => "dumbbell.svg",
+    "Cardio" => "athletics.svg",
+    "Recreation" => "american-football.svg"
+  }.freeze
 
-  end
+  def discover; end
 
   def index
-    # # check for search parameters
-    # if params[:search] && params[:activity_type]
-    # check if search parameter is being passed and isnt an empty string
-    if params[:search] && !params[:search].empty?
-      radius = 20;
-      search_location_lat = Geocoder.search(params[:search])[0].data["lat"]
-      search_location_lon = Geocoder.search(params[:search])[0].data["lon"]
-      if params[:activity_type] == ""
-        # google maps API for search radius
-        search_events = Event.near([search_location_lat, search_location_lon], radius, units: :km)
-      else
-        search_events = Event.near([search_location_lat, search_location_lon], radius, units: :km).where(activity_type: params[:activity_type])
-      end
-      # iterate through the events and check if the there are spots available (capacity > 0)
-      # and that the event has not started
-      # available_events = []
-      # search_events.each do |event|
-      #   # if event.capacity && event.time
-      #   #   if event.capacity > 0 && event.time > Time.now
-      #       available_events << event
-      #   #   end
-      #   # end
-      # end
-      # @events = available_events
-      @events = search_events
-    else
-
-        available_events = []
-        all_events = Event.all
-        all_events.each do |event|
-          # if event.capacity && event.time
-          #   if event.capacity > 0 && event.time > Time.now
-              available_events << event
-          #   end
-          # end
-        end
-        @events = available_events
-    end
-
+    @events = if params[:search].present?
+                search_events_by_location
+              else
+                Event.all
+              end
   end
 
   def show
-    @event = Event.find(params[:id])
     @comments = @event.comments
     @comment = Comment.new
     @users = @event.users
-
-    if current_user
-      @ticket = Ticket.find_by(user_id: current_user.id, event_id: @event.id)
-    end
+    @ticket = Ticket.find_by(user_id: current_user.id, event_id: @event.id) if current_user
   end
 
   def new
@@ -63,67 +32,55 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new
-    @event.title = params[:event][:title]
-    @event.address = params[:event][:address]
-    @event.time = params[:event][:time]
-    @event.end_date = params[:event][:end_date]
-    @event.persistence = params[:event][:persistence]
-    @event.description = params[:event][:description]
-    @event.activity_type = params[:event][:activity_type]
-    @event.capacity = params[:event][:capacity]
-    @event.need_approval = params[:event][:need_approval]
+    @event = Event.new(event_params)
     @event.user_id = current_user.id
-      if params[:event][:activity_type] == "Yoga/Pilates"
-        @event.activity_icon = "lotus-position.svg"
-      elsif params[:event][:activity_type] == "Resistence Training"
-        @event.activity_icon = "dumbbell.svg"
-      elsif params[:event][:activity_type] == "Cardio"
-        @event.activity_icon = "athletics.svg"
-      else params[:event][:activity_type] == "Recreation"
-        @event.activity_icon = "american-football.svg"
-      end
+    @event.activity_icon = ACTIVITY_ICONS.fetch(@event.activity_type, "american-football.svg")
 
     if @event.save
       redirect_to root_url
     else
-      flash[:alert] = "Something went wrong"
-      render :new
+      flash.now[:alert] = "Something went wrong"
+      render :new, status: :unprocessable_entity
     end
   end
 
-  def edit
-    @event = Event.find(params[:id])
-    unless @event.user_id == current_user.id
-      redirect_to events_path, alert: "You are not authorized to edit this event."
-      return
-    end
-  end
+  def edit; end
 
   def update
-    @event = Event.find(params[:id])
-    unless @event.user_id == current_user.id
-      redirect_to events_path, alert: "You are not authorized to update this event."
-      return
-    end
-
-    @event.title = params[:event][:title]
-    @event.address = params[:event][:address]
-    @event.time = params[:event][:time]
-    @event.description = params[:event][:description]
-    @event.activity_type = params[:event][:activity_type]
-    @event.capacity = params[:event][:capacity]
-    @event.need_approval = params[:event][:need_approval]
-    @event.user_id = current_user.id
-
-    if @event.save
+    if @event.update(event_params)
       redirect_to event_path(@event)
     else
-      flash[:alert] = "Something went wrong"
-      render :edit
+      flash.now[:alert] = "Something went wrong"
+      render :edit, status: :unprocessable_entity
     end
-
   end
 
+  private
 
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  def authorize_owner!
+    unless @event.user_id == current_user.id
+      redirect_to events_path, alert: "You are not authorized to modify this event."
+    end
+  end
+
+  def event_params
+    params.require(:event).permit(
+      :title, :address, :time, :end_date, :persistence,
+      :description, :activity_type, :capacity, :need_approval
+    )
+  end
+
+  def search_events_by_location
+    result = Geocoder.search(params[:search]).first
+    return Event.none unless result
+
+    coords = [result.data["lat"], result.data["lon"]]
+    scope = Event.near(coords, 20, units: :km)
+    scope = scope.where(activity_type: params[:activity_type]) if params[:activity_type].present?
+    scope
+  end
 end
