@@ -1,39 +1,24 @@
 class TicketsController < ApplicationController
-  def index
-  end
-
-  def show
-  end
-
-  def new
-  end
+  before_action :authenticate_user!
 
   def create
-    @ticket = Ticket.new
-    @ticket.user_id = current_user.id
-    @ticket.event_id = params[:event_id]
-    @event = current_event
-    @event.capacity -= 1
+    @event = Event.find(params[:event_id])
+    @ticket = Ticket.new(user: current_user, event: @event)
 
-    if @ticket.save && @event.save
-      redirect_to event_path(params[:event_id])
+    if @ticket.save
+      @event.decrement!(:capacity)
+      redirect_to event_path(@event)
     else
       flash[:alert] = "Something went wrong"
-      render 'events#show'
+      redirect_to event_path(@event)
     end
   end
 
   def destroy
-    @ticket = Ticket.find_by(user_id: current_user.id, event_id: current_event)
-    @ticket.delete
-    event = current_event
-    event.capacity += 1
-    event.save
-    redirect_to event_path(current_event.id)
+    @event = Event.find(params[:event_id])
+    @ticket = Ticket.find_by!(user: current_user, event: @event)
+    @ticket.destroy
+    @event.increment!(:capacity)
+    redirect_to event_path(@event)
   end
-
-  def current_event
-    Event.find(params[:event_id])
-  end
-
 end
